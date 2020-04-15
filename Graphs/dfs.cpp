@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+//Using standard template library for implementing graph
 const int maxn = 1e5;
 vector<int>g[maxn];
 int vis[maxn];
