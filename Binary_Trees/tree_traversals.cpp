@@ -12,7 +12,7 @@ Node* insert(int data){
     temp->left = temp->right = NULL;
     return temp;
 }
-
+// inorder traversal of the tree
 void inorder(Node* root){
     if(root == NULL)
         return ;
@@ -20,7 +20,7 @@ void inorder(Node* root){
     cout<<root->data<<" ";
     inorder(root->right);
 }
-
+//preorder traversal of the tree
 void preorder(Node* root){
     if(root == NULL)
         return;
@@ -29,6 +29,7 @@ void preorder(Node* root){
     preorder(root->right);
 }
 
+//postorder traversal of the tree
 void postorder(Node* root){
     if(root == NULL)
         return;
