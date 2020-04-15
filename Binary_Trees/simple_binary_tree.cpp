@@ -1,11 +1,13 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+//creating a Node structure
 struct Node{
     int data;
     Node* left, *right;
 };
 
+//insert operation
 Node* insert(int data){
     Node* temp = new Node();
     temp->data = data;
@@ -13,6 +15,7 @@ Node* insert(int data){
     return temp;
 }
 
+//inorder traversal to print the tree
 void print(Node* head){
     if(head == NULL)
         return;
