@@ -26,7 +26,40 @@ void solve(int arr[], int n){
     cout<<a<<" "<<b<<endl;
 }
 
-// Method 2 Using Sorting
+//Method 2 Using Xor
+// Time complexity - O(n), Space complexity - O(1)
+// Idea is when we take xor of all the array elements and then same xor with all no.'s from 1 to n then that will nullify all the repeating
+// elements except the repeated and missing no. then xor will be x ^ y. So we take the rightmost set bit(k) and then take xor of all the
+// array elements and then xor of all the no's from 1 to n. Then those with k as set then take those in x with xor and then those with unset 
+// then those are in y. So it will give the x and y.
+void solve2(int arr[], int n){
+    int x = 0, y = 0, xoR = arr[0];
+    for(int i =1; i<n; i++)
+        xoR ^= arr[i];
+    
+    for(int j = 1; j<=n; j++)
+        xoR ^= j;
+    
+    int set_bit = xoR & ~(xoR - 1);
+
+    for(int i = 0; i<n; i++){
+        if(arr[i] & set_bit)
+            x ^= arr[i];
+        else 
+            y ^= arr[i];
+    }
+
+    for(int i = 1; i<=n; i++){
+        if(i & set_bit)
+            x ^= i;
+        else 
+            y ^= i;
+    }
+
+    cout<<x<<" "<<y<<endl;
+}
+
+// Method 3 Using Sorting
 // Time = O(nlogn) Space = O(1)
 void solve3(int arr[], int n){
     sort(arr, arr + n);
@@ -49,6 +82,7 @@ int main(){
     for(int i =0; i<n; i++)
         cin>>arr[i];
     solve(arr, n);
+    solve2(arr, n);
     solve3(arr, n);
     return 0;
 }
