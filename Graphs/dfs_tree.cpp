@@ -5,12 +5,12 @@ const int maxn = 1e5;
 vector<int>g[maxn];
 int vis[maxn];
 
-void dfs(int u){
+void dfs(int u, int p){
 	vis[u] = 1;
 	cout<<u<<" ";
 	for(auto i : g[u]){
-		if(!vis[i])
-			dfs(i);
+		if(i == p) continue;
+		dfs(i , u);
 	}
 }
 
@@ -22,6 +22,7 @@ int main(){
 		int x, y;
 		cin>>x>>y;
 		g[x].push_back(y);
+		g[y].push_back(x);
 	}
-	dfs(0);
+	dfs(0, -1);
 }			
