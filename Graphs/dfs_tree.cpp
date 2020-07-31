@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// Dfs in tree. Here we don't require visited array because in tree there is no cycle. We only have to check if the given node doesn't go to its parent.
 const int maxn = 1e5;
 vector<int>g[maxn];
 int vis[maxn];
@@ -24,5 +25,5 @@ int main(){
 		g[x].push_back(y);
 		g[y].push_back(x);
 	}
-	dfs(0, -1);
+	dfs(0, -1); // We are traversing from node 0 as root and root has no parent so its parent is -1.
 }			
