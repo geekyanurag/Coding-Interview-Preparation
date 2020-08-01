@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// Finding the level of the tree.
 const int maxn = 1e5;
 vector<int>g[maxn];
 int level[maxn];
