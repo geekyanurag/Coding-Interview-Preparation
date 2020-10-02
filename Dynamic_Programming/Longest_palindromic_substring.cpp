@@ -2,35 +2,44 @@
 using namespace std;
 
 // Using dp takes O(n * n) time and O(n*n) space.
-void lps(string s){
-    int n = s.length(), res = 1, start;
-    bool dp[n + 1][n + 1];
-
-    for(int i = 0; i<=n; i++) dp[i][0] = false;
-    for(int j = 0; j<=n; )
-    for(int i =0; i<n; i++)
-        dp[i][i] = 1;
+int lps(string s){
+    int n = s.length();
+    int start = 0, max_len = 1;
+    bool dp[n][n];
+    for(int i = 0; i<n; i++){
+        for(int j = 0; j<n; j++)
+            dp[i][j] = 0;
+    }
     
-    int j;
-    for(int l = 2; l<=n; l++){
-        for(int i = 0; i<=n-l; i++){
-            j = i + l - 1;
-            if(l == 2){
-                dp[i][j] = (s[i] == s[j]);
+    for(int i = 0; i<n; i++){
+        dp[i][i] = 1;
+    }
+
+    for(int i = 0; i<n-1; i++){
+        if(s[i] == s[i + 1]){
+            dp[i][i+1] = 1;
+            if(start == 0)      // it will take the starting index of the first palindrome with length = 2
                 start = i;
-                res = 2;
-            }
-            else {
-                dp[i][j] = (s[i] == s[j]) && dp[i+1][j-1];
-                if(l > res) res = l, start = i;
+            max_len = 2;
+        }
+    }
+    
+    for(int l = 2; l <= n; l++){
+        for(int i = 0; i < n - l + 1; i++){
+            int j = (i + l) - 1;
+        
+            if(s[i] == s[j] && dp[i+1][j-1]){
+                dp[i][j] = 1;
+                if(l > max_len){
+                    max_len = l;
+                    start = i;
+                }
             }
         }
     }
-    for(int i = start; i < start + res; i++)
+    
+    for(int i = start; i < start + max_len; i++)
         cout<<s[i];
-    cout<<endl;
-    cout<<"And the length of the longest palindromic substring is "<<res<<endl;
-
 }
 
 // Another method
@@ -40,7 +49,7 @@ void lps2(string s){
     int n = s.length();
 
     for(int i = 1; i<n; i++){
-        low = i-1, high = i;
+        low = i-1, high = i;        // For Even length
         while(low >=0 && high < n && s[low] == s[high]){
             if(high - low + 1 > max_len){
                 start = low;
@@ -49,7 +58,7 @@ void lps2(string s){
             low--, high++;
         }
 
-        low = i-1, high = i + 1;
+        low = i-1, high = i + 1;    // For odd length
         while(low >=0 && high < n && s[low] == s[high]){
             if(high - low + 1 > max_len){
                 start = low;
