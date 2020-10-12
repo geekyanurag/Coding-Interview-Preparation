@@ -19,7 +19,7 @@ int count_subarrays(vector<int>arr, int k){
             count += (mp[i] * (mp[i] - 1)) / 2;
     }
 
-    count += mp[0];
+    count += mp[0];  // if mp[0] == 1 then this case must be added so it will be 1 because it will be the subarray from index 0 till ith position where sum % k == 0.   
 
     return count;
 }
