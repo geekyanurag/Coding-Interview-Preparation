@@ -1,13 +1,13 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-// Given a sorted matrix and you have to search a key in the matrix.
+// Given a sorted matrix and you have to search a key in the matrix. The given matrix is a square matrix. For n x m matrix use r = m  - 1;
 int search(vector<vector<int>>mat, int key){
     int n = mat.size();
     if(n == 0) return -1;
 
     int smallest = mat[0][0], largest = mat[n - 1][n - 1];      // If smallest is first element and largest is last element.
-    if(key < smallest && key > largest) return -1;
+    if(key < smallest && key > largest) return -1;              // For n x m matrix use largest = mat[n - 1][m - 1].
 
     int l = 0, r = n -1;
     while(l < n && r >= 0){
