@@ -28,7 +28,7 @@ bool isBalanced(Node* root){
     lh = height(root->left);
     rh = height(root->right);
 
-    if(abs(lh-rh)<=1 && isBalanced(root->left), isBalanced(root->right))
+    if(abs(lh-rh)<=1 && isBalanced(root->left) && isBalanced(root->right))
         return 1;
     return 0;
 }
