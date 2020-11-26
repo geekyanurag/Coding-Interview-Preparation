@@ -34,22 +34,40 @@ bool isBalanced(Node* root){
 }
 
 //Optimized solution O(n) complexity. Calculating height in the same function
-/*bool isBalanced(Node* root, int* height){
+bool isBalanced1(Node* root, int* height){
     int lh = 0, rh = 0;
     int l = 0, r = 0;
     if(root == NULL){
         *height = 0;
         return true;
     }
-    l = isBalanced(root->left, &lh);
-    r = isBalanced(root->right, &rh);
+    l = isBalanced1(root->left, &lh);
+    r = isBalanced1(root->right, &rh);
     *height = (lh > rh ? lh : rh ) + 1;
     if(abs(lh - rh) > 1)
         return false;
     else 
         return l && r;
 }
-*/
+
+// Same algorithms can be implemented like this :-
+// If the ith node's left subtree is balanced or not. If it is then return the height of the left subtree and similarly if ith node's right subtree is balanced
+// or not if yes then return height of right subtree. Then for ith node we will check if it is height balanced or not if it is then return the height of it.
+int isBalanced2(Node* root){
+    if(!root) return 0;
+
+    int lh = isBalanced2(root->left);
+    if(lh == -1){
+        return -1;
+    }
+    int rh = isBalanced2(root->right);
+    if(rh == -1){
+        return -1;
+    }
+    if(abs(lh - rh) > 1) return -1;
+
+    return 1 + max(lh, rh);
+}
 
 void printTree(Node* root){
     if(root == NULL)
