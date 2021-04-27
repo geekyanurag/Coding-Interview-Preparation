@@ -2,6 +2,23 @@
 #define ll long long
 using namespace std;
 
+//Recursive approach
+int lcs1(int i, int j, int count)
+{
+ 
+    if (i == 0 || j == 0)
+        return count;
+ 
+    if (X[i - 1] == Y[j - 1]) {
+        count = lcs1(i - 1, j - 1, count + 1);
+    }
+    count = max(count,
+                max(lcs1(i, j - 1, 0),
+                    lcs1(i - 1, j, 0)));
+    return count;
+}
+
+// DP approach
 int lcs(string a, string b, int m, int n){
     int dp[m+1][n+1], ans = 0;
     memset(dp, 0, sizeof(dp)); // set all the values of dp matrix to 0
